@@ -1,0 +1,141 @@
+﻿@model List<Workforce.Models.AddemployeeModel>
+@{
+    ViewBag.Title = "Employeelist";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@section Style
+
+{
+    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+}
+
+@section Scripts
+
+{
+    <script src="~/Scripts/jquery.dataTable.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#tbl').DataTable();
+
+        });
+
+    </script>
+
+}
+
+<h2>Employee List</h2>
+
+<table border="1" id="tbl" class="display compact" style="width:100%">
+    <thead>
+        <tr>
+
+            <td>
+                <b>Photo:</b>
+            </td>
+            <td>
+                <b>Resume:</b>
+            </td>
+            <td>
+                <b>Empid:</b>
+            </td>
+            <td>
+                <b>Name:</b>
+            </td>
+            <td>
+                <b>Dob:</b>
+            </td>
+            <td>
+                <b>Gender:</b>
+            </td>
+            <td>
+                <b>Address:</b>
+            </td>
+            <td>
+                <b>City:</b>
+            </td>
+            <td>
+                <b>Email:</b>
+            </td>
+            <td>
+                <b>Mobile:</b>
+            </td>
+            <td>
+                <b>Postion:</b>
+            </td>
+            <td>
+                <b>HireDate:</b>
+            </td>
+            <td>
+                <b>Experience:</b>
+            </td>
+            <td>
+                <b>Edit:</b>
+            </td>
+            <td>
+                <b>Delete:</b>
+            </td>
+
+        </tr>
+    </thead>
+    @{
+        foreach (var e in Model)
+        {
+            <tr>
+                <td>
+                    <img src='@Path.Combine("/Image", e.Photo)' width="35" height="35" />
+                </td>
+                <td>
+                    <a href='@Path.Combine("/Resume", e.Resume)' target="_top">Download!</a>
+                </td>
+                <td>
+                    @e.Eemployeeid
+                </td>
+                <td>
+                    @e.Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => e.Dob)
+                </td>
+                <td>
+                    @e.Gender
+                </td>
+                <td>
+                    @e.Address
+                </td>
+                <td>
+                    @e.City
+                </td>
+                <td>
+                    @e.Email
+                </td>
+                <td>
+                    @e.Mobile
+                </td>
+                <td>
+                    @e.Positon
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem=>e.HireDate)
+                </td>
+                <td>
+                    @e.Experience
+                </td>
+                <td>
+                    <button>@Html.ActionLink("Edit", "UpdateEmployee", "Home", new { Id = e.id }, new { @class = "btn btn-success btn-sm"})</button>
+                </td>
+                <td>
+                    <button>@Html.ActionLink("Delete", "RemoveEmployee", "Home", new { Id = e.id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Are you sure you wish to delete this record?')"})</button>
+                </td>
+
+            </tr>
+        }
+    }
+</table>
+
+
+
+
+
+
